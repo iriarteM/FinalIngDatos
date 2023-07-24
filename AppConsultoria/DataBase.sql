@@ -220,7 +220,6 @@ INSERT INTO CONTRATOS (ID_CONTRATO, AFILIADOS_USER_AF, TIPO_CONTRATO, MONTO_CONT
 VALUES ('CONTRATO5', 'usuario5', 'Pr�stamo', 12000, 18, TO_DATE('05-06-2023', 'DD-MM-YYYY'), TO_DATE('15-07-2024', 'DD-MM-YYYY'));
 
 
-
 --CUENTAS--
 INSERT INTO CUENTAS (AFILIADOS_USER_AF, CONTRATOS_ID_CONTRATO, NUM_CUENTA, MONTO_CUENTA, FECHA_CREACION, NUM_PRESTAMOS, MENSUALIDAD)
 VALUES ('usuario1', 'CONTRATO1', 'CUENTA1', 5000, TO_DATE('01-06-2023', 'DD-MM-YYYY'), 2, 200);
@@ -241,11 +240,9 @@ VALUES ('usuario5', 'CONTRATO5', 'CUENTA5', 10000, TO_DATE('05-06-2023', 'DD-MM-
 
 
 
+--------------PROCEDIMIENTOS ALMACENADOS--------------
 
-
----------PROCEDIMIENTOS ALMACENADOS--------------
-
---Insertar una nueva consulta en "consultorias"
+--Insertar una nueva consulta
 CREATE OR REPLACE PROCEDURE INSERTAR_CONSULTA(
     p_id_consul IN VARCHAR2,
     p_num_consul IN VARCHAR2,
@@ -281,6 +278,7 @@ EXCEPTION
 END;
 /
 
+
 --Actualizar (Editar) una consulta
 CREATE OR REPLACE PROCEDURE ACTUALIZAR_CONSULTA(
     p_num_consul IN VARCHAR2,
@@ -304,6 +302,7 @@ EXCEPTION
 END;
 /
 
+
 -- Eliminar una consulta
 CREATE OR REPLACE PROCEDURE ELIMINAR_CONSULTA(
     p_num_consul IN VARCHAR2,
@@ -321,7 +320,8 @@ EXCEPTION
 END;
 /
 
--- Los mismos para "Familiares"
+
+-- Insertar un nuevo familiar
 CREATE OR REPLACE PROCEDURE INSERTAR_FAMILIAR(
     p_afiliados_user_af IN VARCHAR2,
     p_dni_fam IN VARCHAR2,
@@ -352,6 +352,7 @@ END;
 /
 
 
+-- Actualizar (editar) un familiar
 CREATE OR REPLACE PROCEDURE ACTUALIZAR_FAMILIAR(
     p_afiliados_user_af IN VARCHAR2,
     p_dni_fam IN NUMBER,
@@ -376,6 +377,7 @@ END;
 /
 
 
+-- Eliminar un familiar
 CREATE OR REPLACE PROCEDURE ELIMINAR_FAMILIAR(
     p_dni_fam IN NUMBER,
     p_afiliados_user_af IN VARCHAR2
@@ -393,7 +395,7 @@ END;
 /
 
 
--- Registo de nuevo afiliado
+-- Registar un nuevo afiliado
 CREATE OR REPLACE PROCEDURE REGISTRO(
     p_USER_AF IN VARCHAR2,
     p_DNI_AF IN VARCHAR2,
@@ -433,15 +435,7 @@ END;
 /
 
 
-
-
-
-
-
-
-
-
--------TRIGGERS--------
+--------TRIGGERS--------
 
 -- Salario del afiliado no sea negativo
 CREATE OR REPLACE TRIGGER TRG_AFILIADO_SALARIO
@@ -465,7 +459,6 @@ BEGIN
     COMMIT;
 END;
 /
-
 
 
 -- Longitud del dni igual a 8
